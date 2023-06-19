@@ -69,9 +69,10 @@ const useAuth = defineStore('auth', {
             })
 
             const response = await rawResponse.json()
+            return response
 
         },
-        async createNotes(content:string){
+        async createNote(content:string){
             const uri = `${this.baseURL}note`
             const rawResponse = await fetch(uri, {
                 method: 'POST',
@@ -87,7 +88,15 @@ const useAuth = defineStore('auth', {
             })
 
             const response = await rawResponse.json()
+            if(response.status == false){
+                return false
+            } else{
+                return true
+            }
 
+        },
+        logout(){
+            this.token = null 
         }
     }
 
